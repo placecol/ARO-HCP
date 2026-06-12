@@ -110,3 +110,48 @@ tests:
   - eval_time: 15m
     alertname: MaestroSpecControllerReconcileErrors
     exp_alerts: []
+# Test: MaestroEventStuckUnreconciled fires when age > 300s
+- interval: 1m
+  input_series:
+  - series: 'spec_controller_event_oldest_unreconciled_age_seconds{namespace="maestro"}'
+    values: "360x5" # 360 seconds (6 minutes) sustained
+  - series: 'status_controller_event_oldest_unreconciled_age_seconds{namespace="maestro"}'
+    values: "60x5" # 60 seconds (below threshold)
+  alert_rule_test:
+  - eval_time: 2m
+    alertname: MaestroEventStuckUnreconciled
+    exp_alerts:
+    - exp_labels:
+        severity: warning
+      exp_annotations:
+        description: 'A Maestro event has been unreconciled for 6m 0s. This likely indicates a lost PostgreSQL NOTIFY message. The event will not be processed until the periodic sync runs (default 10 hours).'
+        runbook_url: 'https://eng.ms/docs/cloud-ai-platform/azure-core/azure-cloud-native-and-management-platform/control-plane-bburns/azure-red-hat-openshift/azure-redhat-openshift-team-doc/hcp/runbooks/maestro/index.html'
+        summary: 'Maestro unreconciled event age is too high — possible lost NOTIFY'
+# Test: MaestroEventStuckUnreconciled fires when status controller has old event
+- interval: 1m
+  input_series:
+  - series: 'spec_controller_event_oldest_unreconciled_age_seconds{namespace="maestro"}'
+    values: "60x5" # 60 seconds (below threshold)
+  - series: 'status_controller_event_oldest_unreconciled_age_seconds{namespace="maestro"}'
+    values: "400x5" # 400 seconds (above threshold)
+  alert_rule_test:
+  - eval_time: 2m
+    alertname: MaestroEventStuckUnreconciled
+    exp_alerts:
+    - exp_labels:
+        severity: warning
+      exp_annotations:
+        description: 'A Maestro event has been unreconciled for 6m 40s. This likely indicates a lost PostgreSQL NOTIFY message. The event will not be processed until the periodic sync runs (default 10 hours).'
+        runbook_url: 'https://eng.ms/docs/cloud-ai-platform/azure-core/azure-cloud-native-and-management-platform/control-plane-bburns/azure-red-hat-openshift/azure-redhat-openshift-team-doc/hcp/runbooks/maestro/index.html'
+        summary: 'Maestro unreconciled event age is too high — possible lost NOTIFY'
+# Test: MaestroEventStuckUnreconciled does not fire when age <= 300s
+- interval: 1m
+  input_series:
+  - series: 'spec_controller_event_oldest_unreconciled_age_seconds{namespace="maestro"}'
+    values: "120x5" # 120 seconds (within normal range)
+  - series: 'status_controller_event_oldest_unreconciled_age_seconds{namespace="maestro"}'
+    values: "60x5" # 60 seconds (within normal range)
+  alert_rule_test:
+  - eval_time: 2m
+    alertname: MaestroEventStuckUnreconciled
+    exp_alerts: []

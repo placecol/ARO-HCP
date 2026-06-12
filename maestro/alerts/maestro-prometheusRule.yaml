@@ -77,3 +77,19 @@ spec:
         description: 'Maestro spec controller reconcile error rate is above 10% for the last 10 minutes. Resources may not be reaching management clusters. Current value: {{ $value | humanizePercentage }}.'
         runbook_url: 'https://eng.ms/docs/cloud-ai-platform/azure-core/azure-cloud-native-and-management-platform/control-plane-bburns/azure-red-hat-openshift/azure-redhat-openshift-team-doc/hcp/runbooks/maestro/index.html'
         summary: 'Maestro spec controller reconcile error rate is high'
+    - alert: MaestroEventStuckUnreconciled
+      # Fires when a spec or status event has been in the database
+      # unreconciled for more than 5 minutes. Potential causes for
+      # for old unreconciled events are lost postgres NOTIFY messages,
+      # or slow/stuck processing of the work queue. 
+      expr: |
+        max(
+          {__name__=~"(spec|status)_controller_event_oldest_unreconciled_age_seconds", namespace="maestro"}
+        ) > 300
+      for: 1m
+      labels:
+        severity: warning
+      annotations:
+        description: 'A Maestro event has been unreconciled for {{ $value | humanizeDuration }}. This likely indicates a lost PostgreSQL NOTIFY message. The event will not be processed until the periodic sync runs (default 10 hours).'
+        runbook_url: 'https://eng.ms/docs/cloud-ai-platform/azure-core/azure-cloud-native-and-management-platform/control-plane-bburns/azure-red-hat-openshift/azure-redhat-openshift-team-doc/hcp/runbooks/maestro/index.html'
+        summary: 'Maestro unreconciled event age is too high — possible lost NOTIFY'
