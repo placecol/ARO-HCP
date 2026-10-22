@@ -23,6 +23,9 @@ resource mgmtCapacityRules 'Microsoft.AlertsManagement/prometheusRuleGroups@2023
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -53,6 +56,9 @@ resource mgmtCapacityRules 'Microsoft.AlertsManagement/prometheusRuleGroups@2023
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -83,6 +89,9 @@ resource mgmtCapacityRules 'Microsoft.AlertsManagement/prometheusRuleGroups@2023
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -113,6 +122,9 @@ resource mgmtCapacityRules 'Microsoft.AlertsManagement/prometheusRuleGroups@2023
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -156,6 +168,9 @@ resource hcpClusterOperatorsRules 'Microsoft.AlertsManagement/prometheusRuleGrou
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -186,6 +201,9 @@ resource hcpClusterOperatorsRules 'Microsoft.AlertsManagement/prometheusRuleGrou
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -216,6 +234,9 @@ resource hcpClusterOperatorsRules 'Microsoft.AlertsManagement/prometheusRuleGrou
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -259,6 +280,9 @@ resource kubeApplier 'Microsoft.AlertsManagement/prometheusRuleGroups@2023-03-01
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -287,6 +311,9 @@ resource kubeApplier 'Microsoft.AlertsManagement/prometheusRuleGroups@2023-03-01
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -315,6 +342,9 @@ resource kubeApplier 'Microsoft.AlertsManagement/prometheusRuleGroups@2023-03-01
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]

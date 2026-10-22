@@ -731,6 +731,9 @@ resource {{.name}} 'Microsoft.AlertsManagement/prometheusRuleGroups@2023-03-01' 
           actionProperties: {
             'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
             'IcM.CorrelationId': '#$.annotations.correlationId#'
+            'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+            'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+            'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
           }
         }]
         alert: '{{.Alert}}'

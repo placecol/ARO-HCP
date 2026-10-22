@@ -23,6 +23,9 @@ resource rpUserjourneyKasAvailabilityMonitorRules 'Microsoft.AlertsManagement/pr
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -60,6 +63,9 @@ Namespace: {{ $labels.namespace }}
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -97,6 +103,9 @@ Namespace: {{ $labels.namespace }}
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]

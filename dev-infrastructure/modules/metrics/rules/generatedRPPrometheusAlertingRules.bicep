@@ -23,6 +23,9 @@ resource arohcpAccessClusterSloErrorAlerts 'Microsoft.AlertsManagement/prometheu
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -54,6 +57,9 @@ resource arohcpAccessClusterSloErrorAlerts 'Microsoft.AlertsManagement/prometheu
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -85,6 +91,9 @@ resource arohcpAccessClusterSloErrorAlerts 'Microsoft.AlertsManagement/prometheu
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -115,6 +124,9 @@ resource arohcpAccessClusterSloErrorAlerts 'Microsoft.AlertsManagement/prometheu
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -144,6 +156,9 @@ resource arohcpAccessClusterSloErrorAlerts 'Microsoft.AlertsManagement/prometheu
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -185,6 +200,9 @@ resource arohcpAccessClusterSaturationAlerts 'Microsoft.AlertsManagement/prometh
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -213,6 +231,9 @@ resource arohcpAccessClusterSaturationAlerts 'Microsoft.AlertsManagement/prometh
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -254,6 +275,9 @@ resource arohcpClusterProvisionSloLatencyAlerts 'Microsoft.AlertsManagement/prom
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -295,6 +319,9 @@ resource arohcpClusterProvisionSloWindowedErrorAlerts 'Microsoft.AlertsManagemen
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -326,6 +353,9 @@ resource arohcpClusterProvisionSloWindowedErrorAlerts 'Microsoft.AlertsManagemen
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -357,6 +387,9 @@ resource arohcpClusterProvisionSloWindowedErrorAlerts 'Microsoft.AlertsManagemen
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -387,6 +420,9 @@ resource arohcpClusterProvisionSloWindowedErrorAlerts 'Microsoft.AlertsManagemen
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -430,6 +466,9 @@ resource rpUserJourneyClusterUpgradeMonitorRules 'Microsoft.AlertsManagement/pro
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -463,6 +502,9 @@ Service Cluster: {{ $labels.cluster }}
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -509,6 +551,9 @@ resource arohcpNodepoolSloErrorAlerts 'Microsoft.AlertsManagement/prometheusRule
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -540,6 +585,9 @@ resource arohcpNodepoolSloErrorAlerts 'Microsoft.AlertsManagement/prometheusRule
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -571,6 +619,9 @@ resource arohcpNodepoolSloErrorAlerts 'Microsoft.AlertsManagement/prometheusRule
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -601,6 +652,9 @@ resource arohcpNodepoolSloErrorAlerts 'Microsoft.AlertsManagement/prometheusRule
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -630,6 +684,9 @@ resource arohcpNodepoolSloErrorAlerts 'Microsoft.AlertsManagement/prometheusRule
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -671,6 +728,9 @@ resource arohcpNodepoolSaturationAlerts 'Microsoft.AlertsManagement/prometheusRu
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -712,6 +772,9 @@ resource arohcpFrontendSloErrorAlerts 'Microsoft.AlertsManagement/prometheusRule
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -743,6 +806,9 @@ resource arohcpFrontendSloErrorAlerts 'Microsoft.AlertsManagement/prometheusRule
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -774,6 +840,9 @@ resource arohcpFrontendSloErrorAlerts 'Microsoft.AlertsManagement/prometheusRule
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -818,6 +887,9 @@ resource arohcpFrontendSloLatencyAlerts 'Microsoft.AlertsManagement/prometheusRu
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -849,6 +921,9 @@ resource arohcpFrontendSloLatencyAlerts 'Microsoft.AlertsManagement/prometheusRu
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -880,6 +955,9 @@ resource arohcpFrontendSloLatencyAlerts 'Microsoft.AlertsManagement/prometheusRu
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -924,6 +1002,9 @@ resource arohcpFrontendSloReadyAlerts 'Microsoft.AlertsManagement/prometheusRule
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -966,6 +1047,9 @@ resource arohcpFrontendSloSaturationAlerts 'Microsoft.AlertsManagement/prometheu
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -1008,6 +1092,9 @@ resource arohcpClusterDeletionSloWindowedErrorAlerts 'Microsoft.AlertsManagement
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -1039,6 +1126,9 @@ resource arohcpClusterDeletionSloWindowedErrorAlerts 'Microsoft.AlertsManagement
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -1070,6 +1160,9 @@ resource arohcpClusterDeletionSloWindowedErrorAlerts 'Microsoft.AlertsManagement
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -1100,6 +1193,9 @@ resource arohcpClusterDeletionSloWindowedErrorAlerts 'Microsoft.AlertsManagement
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -1130,6 +1226,9 @@ resource arohcpClusterDeletionSloWindowedErrorAlerts 'Microsoft.AlertsManagement
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -1161,6 +1260,9 @@ resource arohcpClusterDeletionSloWindowedErrorAlerts 'Microsoft.AlertsManagement
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -1192,6 +1294,9 @@ resource arohcpClusterDeletionSloWindowedErrorAlerts 'Microsoft.AlertsManagement
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -1222,6 +1327,9 @@ resource arohcpClusterDeletionSloWindowedErrorAlerts 'Microsoft.AlertsManagement
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
@@ -1264,6 +1372,9 @@ resource arohcpClusterDeletionSaturationAlerts 'Microsoft.AlertsManagement/prome
             actionProperties: {
               'IcM.Title': '#$.labels.cluster#: #$.annotations.title#'
               'IcM.CorrelationId': '#$.annotations.correlationId#'
+              'IcM.OccurringLocation.DataCenter': '#$.labels.region#'
+              'IcM.OccurringLocation.DeviceName': '#$.labels.cluster#'
+              'IcM.OccurringLocation.DeviceGroup': '#$.labels.component#'
             }
           }
         ]
