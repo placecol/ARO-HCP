@@ -442,7 +442,7 @@ generate-kiota:
 PERS_OVERRIDE_FILE ?= /tmp/personal-dev-override.yaml
 
 build-services: $(TEMPLATIZE)
-	$(MAKE) $(BUILD_SERVICES_OPTS) build-frontend build-backend build-admin build-sessiongate build-mgmt-agent build-swift-recorder build-kube-applier build-fleet build-aro-hcp-exporter
+	$(MAKE) $(BUILD_SERVICES_OPTS) build-frontend build-backend build-admin build-sessiongate build-alertprocessing build-mgmt-agent build-swift-recorder build-kube-applier build-fleet build-aro-hcp-exporter
 .PHONY: build-services
 
 build-frontend:
@@ -460,6 +460,10 @@ build-admin:
 build-sessiongate:
 	$(MAKE) -C sessiongate build-and-push
 .PHONY: build-sessiongate
+
+build-alertprocessing:
+	$(MAKE) -C alertprocessing build-and-push
+.PHONY: build-alertprocessing
 
 build-mgmt-agent:
 	$(MAKE) -C mgmt-agent build-and-push
@@ -486,6 +490,7 @@ record-services-override: $(YQ) $(ORAS)
 	$(MAKE) -C backend record-override OVERRIDE_CONFIG_FILE=/tmp/_backend-override.yaml
 	$(MAKE) -C admin record-override OVERRIDE_CONFIG_FILE=/tmp/_admin-override.yaml
 	$(MAKE) -C sessiongate record-override OVERRIDE_CONFIG_FILE=/tmp/_sessiongate-override.yaml
+	$(MAKE) -C alertprocessing record-override OVERRIDE_CONFIG_FILE=/tmp/_alertprocessing-override.yaml
 	$(MAKE) -C mgmt-agent record-override OVERRIDE_CONFIG_FILE=/tmp/_mgmt-agent-override.yaml
 	$(MAKE) -C swift-recorder record-override OVERRIDE_CONFIG_FILE=/tmp/_swift-recorder-override.yaml
 	$(MAKE) -C kube-applier record-override OVERRIDE_CONFIG_FILE=/tmp/_kube-applier-override.yaml
@@ -496,6 +501,7 @@ record-services-override: $(YQ) $(ORAS)
 	  /tmp/_backend-override.yaml \
 	  /tmp/_admin-override.yaml \
 	  /tmp/_sessiongate-override.yaml \
+	  /tmp/_alertprocessing-override.yaml \
 	  /tmp/_mgmt-agent-override.yaml \
 	  /tmp/_swift-recorder-override.yaml \
 	  /tmp/_kube-applier-override.yaml \
@@ -512,6 +518,7 @@ latest-services-override: $(YQ)
 	$(MAKE) -C backend record-latest-override OVERRIDE_CONFIG_FILE=/tmp/_backend-override.yaml &
 	$(MAKE) -C admin record-latest-override OVERRIDE_CONFIG_FILE=/tmp/_admin-override.yaml &
 	$(MAKE) -C sessiongate record-latest-override OVERRIDE_CONFIG_FILE=/tmp/_sessiongate-override.yaml &
+	$(MAKE) -C alertprocessing record-latest-override OVERRIDE_CONFIG_FILE=/tmp/_alertprocessing-override.yaml &
 	$(MAKE) -C mgmt-agent record-latest-override OVERRIDE_CONFIG_FILE=/tmp/_mgmt-agent-override.yaml &
 	$(MAKE) -C kube-applier record-latest-override OVERRIDE_CONFIG_FILE=/tmp/_kube-applier-override.yaml &
 	$(MAKE) -C fleet record-latest-override OVERRIDE_CONFIG_FILE=/tmp/_fleet-override.yaml &
@@ -522,6 +529,7 @@ latest-services-override: $(YQ)
 	  /tmp/_backend-override.yaml \
 	  /tmp/_admin-override.yaml \
 	  /tmp/_sessiongate-override.yaml \
+	  /tmp/_alertprocessing-override.yaml \
 	  /tmp/_mgmt-agent-override.yaml \
 	  /tmp/_kube-applier-override.yaml \
 	  /tmp/_fleet-override.yaml \

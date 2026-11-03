@@ -87,6 +87,39 @@ resourceGroups:
     dependsOn:
     - resourceGroup: service
       step: cluster-output
+  - name: alertprocessing-apr-permissions
+    action: ARM
+    template: templates/alertprocessing-apr-permissions.bicep
+    parameters: configurations/alertprocessing-apr-read-permissions.tmpl.bicepparam
+    deploymentLevel: ResourceGroup
+    dependsOn:
+    - resourceGroup: service
+      step: cluster
+  # Default action group the Alert Processing controller applies to every rule. Created in the
+  # regional RG (alongside the APR resources and AMWs) so the controller MSI's Monitoring
+  # Contributor grant there also covers linking this action group. Mirrors how downstream
+  # auto-creates the ICM action groups.
+  - name: alertprocessing-actiongroup
+    action: ARM
+    template: templates/alertprocessing-actiongroup.bicep
+    parameters: configurations/alertprocessing-actiongroup.tmpl.bicepparam
+    deploymentLevel: ResourceGroup
+# Dedicated resource group for the managed Alert Processing Rule resources. Declaring it here
+# provisions the RG, and the role assignment grants the controller MSI Monitoring Contributor on
+# it (write of actionRules). The AMW scope link and the action-group link are still covered by the
+# controller's Monitoring Contributor grant on the regional RG above.
+- name: apr
+  resourceGroup: '{{ .regionRG }}-apr'
+  subscription: '{{ .svc.subscription.key }}'
+  steps:
+  - name: apr-permissions
+    action: ARM
+    template: templates/alertprocessing-apr-permissions.bicep
+    parameters: configurations/alertprocessing-apr-permissions.tmpl.bicepparam
+    deploymentLevel: ResourceGroup
+    dependsOn:
+    - resourceGroup: service
+      step: cluster
 - name: auditLogs
   resourceGroup: '{{ .auditLogsEventHub.rg }}'
   subscription: '{{ .svc.subscription.key }}'

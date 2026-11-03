@@ -1,0 +1,40 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: alertprocessing
+  name: alertprocessing-controller
+rules:
+- apiGroups:
+  - alertprocessing.aro-hcp.azure.com
+  resources:
+  - alertprocessingrules
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - alertprocessing.aro-hcp.azure.com
+  resources:
+  - alertprocessingrules/status
+  verbs:
+  - get
+  - update
+  - patch
+- apiGroups:
+  - alertprocessing.aro-hcp.azure.com
+  resources:
+  - alertprocessingrules/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+  - patch

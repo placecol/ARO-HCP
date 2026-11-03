@@ -1556,6 +1556,36 @@
         "cert"
       ]
     },
+    "alertprocessing": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/containerImageOptionalDigest"
+        },
+        "k8s": {
+          "$ref": "#/definitions/k8sDeployment"
+        },
+        "managedIdentityName": {
+          "type": "string",
+          "description": "The name of the MSI used by the alertprocessing controller to interact with Azure"
+        },
+        "catalogPollInterval": {
+          "type": "string",
+          "description": "How often loop 1 polls Azure for alert rules (Go duration, e.g. 5m)"
+        },
+        "notificationEmail": {
+          "type": "string",
+          "description": "Email receiver added to the auto-created default action group. May be empty."
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "image",
+        "k8s",
+        "managedIdentityName",
+        "catalogPollInterval"
+      ]
+    },
     "hcpRecovery": {
       "type": "object",
       "properties": {
@@ -4124,6 +4154,7 @@
     "serviceKeyVault",
     "serviceTreeId",
     "sessiongate",
+    "alertprocessing",
     "svc",
     "msiRp",
     "msiCredentialsRefresher",

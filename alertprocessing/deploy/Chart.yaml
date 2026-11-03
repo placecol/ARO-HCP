@@ -1,0 +1,6 @@
+apiVersion: v2
+name: alertprocessing
+description: Controller that manages Azure Alert Processing Rules for ARO HCP.
+type: application
+version: 0.1.0
+appVersion: "v0.1.0"

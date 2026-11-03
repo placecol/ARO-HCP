@@ -456,6 +456,15 @@ param sessiongateIngressCertName string
 @description('The SAN and CN for the sessiongate ingress certificate')
 param sessiongateIngressCertSAN string
 
+@description('The name of the Alert Processing controller managed identity')
+param alertprocessingMIName string
+
+@description('The namespace of the Alert Processing controller managed identity')
+param alertprocessingNamespace string
+
+@description('The service account name of the Alert Processing controller managed identity')
+param alertprocessingServiceAccountName string
+
 @description('Reference pre-created infrastructure identities instead of creating identities in the service resource group.')
 param useLeasedInfrastructureIdentities bool = false
 
@@ -524,6 +533,11 @@ var workloadIdentities = items({
     uamiName: sessiongateMIName
     namespace: sessiongateNamespace
     serviceAccountName: sessiongateServiceAccountName
+  }
+  alertprocessing_wi: {
+    uamiName: alertprocessingMIName
+    namespace: alertprocessingNamespace
+    serviceAccountName: alertprocessingServiceAccountName
   }
   exporter_wi: {
     uamiName: exporterMIName

@@ -964,6 +964,29 @@ defaults:
       name: sessiongate-cert-{{ .ctx.environment }}-{{ .ctx.regionShort }}
       san: ''
       contentType: x-pkcs12
+  # Alert Processing (APR controller)
+  alertprocessing:
+    image:
+      registry: arohcpsvcdev.azurecr.io
+      repository: arohcpalertprocessing
+      digest: ""
+    managedIdentityName: alertprocessing
+    k8s:
+      replicas: 2
+      namespace: alertprocessing
+      serviceAccountName: alertprocessing
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          memory: 256Mi
+    # How often loop 1 polls Azure for alert rules.
+    catalogPollInterval: 5m
+    # Email address added as a receiver on the auto-created default action group. The action
+    # group is always provisioned by the service-cluster infra so the controller has an action
+    # group to apply; when this is empty the action group is created with no receivers.
+    notificationEmail: "cplace@redhat.com"
   # HCP Recovery
   hcpRecovery:
     image:

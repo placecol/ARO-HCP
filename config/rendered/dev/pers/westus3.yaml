@@ -75,6 +75,24 @@ alertEventsEventHub:
   kustoConsumerGroupName: AlertEventsToKusto
   kustoDataConnectionName: pers-westus3-alert-events
   name: metric-alerts
+alertprocessing:
+  catalogPollInterval: 5m
+  image:
+    digest: ""
+    registry: arohcpsvcdev.azurecr.io
+    repository: arohcpalertprocessing
+  k8s:
+    namespace: alertprocessing
+    replicas: 2
+    resources:
+      limits:
+        memory: 256Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+    serviceAccountName: alertprocessing
+  managedIdentityName: alertprocessing
+  notificationEmail: cplace@redhat.com
 armHelperCertName: armHelperCert2
 armHelperClientId: 3331e670-0804-48e8-a086-6241671ddc93
 armHelperFPAPrincipalId: 47f69502-0065-4d9a-b19b-d403e183d2f4

@@ -65,6 +65,10 @@ param sessiongateServiceAccountName = '{{ .sessiongate.k8s.serviceAccountName }}
 param sessiongateIngressCertName = '{{ .sessiongate.cert.name }}'
 param sessiongateIngressCertSAN = '{{ .sessiongate.cert.san }}'
 
+param alertprocessingMIName = '{{ .alertprocessing.managedIdentityName }}'
+param alertprocessingNamespace = '{{ .alertprocessing.k8s.namespace }}'
+param alertprocessingServiceAccountName = '{{ .alertprocessing.k8s.serviceAccountName }}'
+
 param maestroMIName = '{{ .maestro.server.managedIdentityName }}'
 param maestroNamespace = '{{ .maestro.server.k8s.namespace }}'
 param maestroServiceAccountName = '{{ .maestro.server.k8s.serviceAccountName }}'

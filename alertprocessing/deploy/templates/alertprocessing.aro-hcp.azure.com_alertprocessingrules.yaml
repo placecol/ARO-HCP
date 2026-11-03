@@ -1,0 +1,140 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: alertprocessingrules.alertprocessing.aro-hcp.azure.com
+  labels:
+    app.kubernetes.io/name: alertprocessing
+spec:
+  group: alertprocessing.aro-hcp.azure.com
+  names:
+    kind: AlertProcessingRule
+    listKind: AlertProcessingRuleList
+    plural: alertprocessingrules
+    singular: alertprocessingrule
+  scope: Cluster
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
+    additionalPrinterColumns:
+    - name: Scope
+      type: string
+      jsonPath: .spec.scope
+    - name: Alert Rule
+      type: string
+      jsonPath: .spec.alertRuleName
+    - name: Applied Form
+      type: string
+      jsonPath: .status.appliedForm
+    subresources:
+      status: {}
+    schema:
+      openAPIV3Schema:
+        description: |-
+          AlertProcessingRule is the desired state of a single Azure Alert Processing
+          Rule. The catalog controller owns the catalog fields and the operator-facing
+          API owns spec.suppression.
+        type: object
+        required:
+        - spec
+        properties:
+          apiVersion:
+            type: string
+          kind:
+            type: string
+          metadata:
+            type: object
+          spec:
+            type: object
+            required:
+            - scope
+            - alertRuleName
+            - defaultActionGroupID
+            properties:
+              scope:
+                description: scope is the AMW family (hcps or services).
+                type: string
+                enum:
+                - hcps
+                - services
+              alertRuleName:
+                description: alertRuleName is the "group/alertname" identifier to match.
+                type: string
+                minLength: 1
+                maxLength: 511
+              defaultActionGroupID:
+                description: defaultActionGroupID is the action group always applied.
+                type: string
+                minLength: 1
+              suppression:
+                description: |-
+                  suppression, when set and currently in-window, extends the alertContext
+                  filter. Written exclusively by the operator-facing API.
+                type: object
+                required:
+                - filter
+                - start
+                - end
+                x-kubernetes-validations:
+                - rule: self.end > self.start
+                  message: end must be after start
+                properties:
+                  filter:
+                    type: string
+                    minLength: 1
+                  jira:
+                    type: string
+                  reason:
+                    type: string
+                  start:
+                    type: string
+                    format: date-time
+                  end:
+                    type: string
+                    format: date-time
+          status:
+            type: object
+            properties:
+              conditions:
+                type: array
+                items:
+                  type: object
+                  required:
+                  - lastTransitionTime
+                  - message
+                  - reason
+                  - status
+                  - type
+                  properties:
+                    lastTransitionTime:
+                      type: string
+                      format: date-time
+                    message:
+                      type: string
+                      maxLength: 32768
+                    observedGeneration:
+                      type: integer
+                      format: int64
+                      minimum: 0
+                    reason:
+                      type: string
+                      maxLength: 1024
+                    status:
+                      type: string
+                      enum:
+                      - "True"
+                      - "False"
+                      - Unknown
+                    type:
+                      type: string
+                      maxLength: 316
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              azureResourceID:
+                type: string
+              appliedForm:
+                type: string
+              observedGeneration:
+                type: integer
+                format: int64

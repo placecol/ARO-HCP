@@ -1,0 +1,39 @@
+image:
+  registry: "{{ .acr.svc.name }}.{{ .acrDNSSuffix }}"
+  repository: "{{ .alertprocessing.image.repository }}"
+  digest: "{{ .alertprocessing.image.digest }}"
+deployment:
+  replicas: "{{ .alertprocessing.k8s.replicas }}"
+  requests:
+    cpu: "{{ .alertprocessing.k8s.resources.requests.cpu }}"
+    memory: "{{ .alertprocessing.k8s.resources.requests.memory }}"
+  limits:
+    memory: "{{ .alertprocessing.k8s.resources.limits.memory }}"
+logVerbosity: 2
+health:
+  port: 8080
+nodeSelector: {}
+tolerations: []
+affinity: {}
+serviceAccount:
+  name: "{{ .alertprocessing.k8s.serviceAccountName }}"
+  # Injected by the pipeline from the alertprocessing-lookup step (MSI client id + tenant).
+  workloadIdentityClientId: "__alertprocessingMsiClientId__"
+  workloadIdentityTenantId: "__tenantId__"
+azure:
+  # Injected by the pipeline (the service-cluster subscription is not a config.yaml value),
+  # mirroring the admin service's APR_SUBSCRIPTION_ID wiring.
+  subscriptionId: "__subscriptionId__"
+alertProcessing:
+  # The managed APR resources live in a dedicated resource group (regionRG + "-apr"), separate
+  # from the shared regional RG (which still holds the AMWs and the default action group below).
+  regionalResourceGroup: "{{ .regionRG }}-apr"
+  # AMW resource IDs are assembled the same way the admin service derives them:
+  # regionRG + the existing monitoring workspace names + the pipeline-injected subscription.
+  hcpsAmwResourceId: "/subscriptions/__subscriptionId__/resourceGroups/{{ .regionRG }}/providers/Microsoft.Monitor/accounts/{{ .monitoring.hcpWorkspaceName }}"
+  servicesAmwResourceId: "/subscriptions/__subscriptionId__/resourceGroups/{{ .regionRG }}/providers/Microsoft.Monitor/accounts/{{ .monitoring.svcWorkspaceName }}"
+  # The default action group is created in the regional RG by
+  # dev-infrastructure/templates/alertprocessing-actiongroup.bicep; assemble its ID the same
+  # way as the AMW IDs (regionRG + fixed name + pipeline-injected subscription).
+  defaultActionGroupId: "/subscriptions/__subscriptionId__/resourceGroups/{{ .regionRG }}/providers/microsoft.insights/actionGroups/alertprocessing-default"
+  catalogPollInterval: "{{ .alertprocessing.catalogPollInterval }}"

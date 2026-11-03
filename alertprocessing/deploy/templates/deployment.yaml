@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alertprocessing
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: alertprocessing
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: alertprocessing
+  replicas: {{ .Values.deployment.replicas }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: alertprocessing
+        azure.workload.identity/use: "true"
+    spec:
+      securityContext:
+        runAsNonRoot: true
+      containers:
+      - command:
+        - "/alertprocessing"
+        args:
+        - controller
+        - "--health-address=:{{ .Values.health.port }}"
+        - "--log-verbosity={{ .Values.logVerbosity }}"
+        - "--subscription-id={{ .Values.azure.subscriptionId }}"
+        - "--regional-rg={{ .Values.alertProcessing.regionalResourceGroup }}"
+        - "--hcps-amw-id={{ .Values.alertProcessing.hcpsAmwResourceId }}"
+        - "--services-amw-id={{ .Values.alertProcessing.servicesAmwResourceId }}"
+        - "--default-action-group-id={{ .Values.alertProcessing.defaultActionGroupId }}"
+        - "--catalog-poll-interval={{ .Values.alertProcessing.catalogPollInterval }}"
+        image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}@{{ .Values.image.digest }}"
+        name: alertprocessing-controller
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: AZURE_TOKEN_CREDENTIALS
+          value: "WorkloadIdentityCredential"
+        ports:
+        - containerPort: {{ .Values.health.port }}
+          protocol: TCP
+          name: health
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 65532
+          runAsGroup: 65532
+          seccompProfile:
+            type: RuntimeDefault
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - "ALL"
+          readOnlyRootFilesystem: true
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: {{ .Values.health.port }}
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: {{ .Values.health.port }}
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources:
+          requests:
+            cpu: {{ .Values.deployment.requests.cpu }}
+            memory: {{ .Values.deployment.requests.memory }}
+          limits:
+            memory: {{ .Values.deployment.limits.memory }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      terminationGracePeriodSeconds: 10
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+      affinity: {{ toYaml .Values.affinity | nindent 8 }}
+      tolerations: {{ toYaml .Values.tolerations | nindent 8 }}

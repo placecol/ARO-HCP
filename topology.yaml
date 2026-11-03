@@ -42,6 +42,9 @@ services:
         - serviceGroup: Microsoft.Azure.ARO.HCP.Fleet
           pipelinePath: fleet/pipeline.yaml
           purpose: Deploy the Fleet controller.
+        - serviceGroup: Microsoft.Azure.ARO.HCP.AlertProcessing
+          pipelinePath: alertprocessing/pipeline.yaml
+          purpose: Deploy the Alert Processing controller.
         pipelinePath: dev-infrastructure/svc-pipeline.yaml
         purpose: Deploy the service cluster and supporting infrastructure.
       - serviceGroup: Microsoft.Azure.ARO.HCP.Management.Infra

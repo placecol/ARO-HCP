@@ -1,0 +1,100 @@
+$schema: "pipeline.schema.v1"
+serviceGroup: Microsoft.Azure.ARO.HCP.AlertProcessing
+rolloutName: Alert Processing Rollout
+resourceGroups:
+- name: global
+  resourceGroup: '{{ .global.rg }}'
+  subscription: '{{ .global.subscription.key }}'
+  steps:
+  - name: output
+    action: ARM
+    template: templates/output-global.bicep
+    parameters: ../dev-infrastructure/configurations/output-global.tmpl.bicepparam
+    deploymentLevel: ResourceGroup
+    outputOnly: true
+  - name: mirror-image
+    action: ImageMirror
+    targetACR:
+      configRef: 'acr.svc.name'
+    sourceRegistry:
+      configRef: alertprocessing.image.registry
+    repository:
+      configRef: alertprocessing.image.repository
+    digest:
+      configRef: alertprocessing.image.digest
+    pullSecretKeyVault:
+      configRef: global.keyVault.name
+    pullSecretName:
+      configRef: imageSync.ondemandSync.pullSecretName
+    shellIdentity:
+      input:
+        resourceGroup: global
+        step: output
+        name: globalMSIId
+    automatedRetry:
+      errorContainsAny:
+      - "unknown_storage_failure"
+      - "unexpected EOF"
+      - "unauthorized: authentication required"
+      - "RegistryErrorResponse"
+      - "Please retry later"
+      - "connection refused"
+      - "i/o timeout"
+      maximumRetryCount: 5
+      durationBetweenRetries: 1m
+- name: kusto
+  resourceGroup: '{{ .kusto.rg }}'
+  subscription: '{{ .global.subscription.key }}'
+  steps:
+  - name: kusto-lookup
+    action: ARM
+    template: ../dev-infrastructure/templates/kusto-lookup.bicep
+    parameters: ../dev-infrastructure/configurations/kusto-lookup.tmpl.bicepparam
+    deploymentLevel: ResourceGroup
+    outputOnly: true
+- name: service
+  resourceGroup: '{{ .svc.rg }}'
+  subscription: '{{ .svc.subscription.key }}'
+  steps:
+  - name: output
+    action: ARM
+    template: ../dev-infrastructure/modules/alertprocessing/alertprocessing-lookup.bicep
+    parameters: ../dev-infrastructure/configurations/alertprocessing-lookup.tmpl.bicepparam
+    deploymentLevel: ResourceGroup
+    outputOnly: true
+  - name: deploy
+    aksCluster: '{{ .svc.aks.name }}'
+    action: Helm
+    timeout: 10m
+    releaseName: 'alertprocessing'
+    releaseNamespace: '{{ .alertprocessing.k8s.namespace }}'
+    chartDir: ./deploy/
+    valuesFile: ./values.yaml
+    namespaceFiles:
+    - namespace.yaml
+    kustoDatabase: '{{ .kusto.serviceLogsDatabase }}'
+    kustoTable: 'containerLogs'
+    kustoEndpoint:
+      resourceGroup: kusto
+      step: kusto-lookup
+      name: kustoUri
+    inputVariables:
+      tenantId:
+        resourceGroup: service
+        step: output
+        name: tenantId
+      subscriptionId:
+        resourceGroup: service
+        step: output
+        name: subscriptionId
+      alertprocessingMsiClientId:
+        resourceGroup: service
+        step: output
+        name: alertprocessingMsiClientId
+    dependsOn:
+    - resourceGroup: global
+      step: mirror-image
+    identityFrom:
+      resourceGroup: global
+      step: output
+      name: globalMSIId
